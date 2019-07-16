@@ -16,6 +16,7 @@ class SKILLADVENTUREGAME_API APlayerCharacterController : public APlayerControll
 	GENERATED_BODY()
 
 public:
+	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 
 	UPROPERTY()
@@ -26,4 +27,10 @@ public:
 
 	UFUNCTION()
 	void MoveForward(float Axis);
+	UFUNCTION()
+	void MoveRight(float Axis);
+	UFUNCTION()
+	void BeginJump();
+	UFUNCTION()
+	void EndJump();
 };
