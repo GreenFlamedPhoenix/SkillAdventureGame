@@ -5,6 +5,7 @@
 #include "PlayerCharacter/PlayerCharacter.h"
 
 
+
 void APlayerCharacterController::BeginPlay()
 {
 	this->SetInputMode(FInputModeGameOnly());
@@ -23,10 +24,13 @@ void APlayerCharacterController::SetupInputComponent()
 	InputComponent->BindAxis("Move Forward", this, &APlayerCharacterController::MoveForward);
 	InputComponent->BindAxis("Move Right", this, &APlayerCharacterController::MoveRight);
 	InputComponent->BindAxis("Look Horizontal", this, &APlayerCharacterController::AddYawInput);
-	InputComponent->BindAxis("Look Vertical", this, &APlayerCharacterController::AddPitchInput);
+	InputComponent->BindAxis("Look Vertically", this, &APlayerCharacterController::AddPitchInput);
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &APlayerCharacterController::BeginJump);
 	InputComponent->BindAction("Jump", IE_Released, this, &APlayerCharacterController::EndJump);
+	InputComponent->BindAction("Sprint", IE_Pressed, this, &APlayerCharacterController::BeginSprint);
+	InputComponent->BindAction("Sprint", IE_Released, this, &APlayerCharacterController::EndSprint);
+	InputComponent->BindAction("Toggle Walk", IE_Pressed, this, &APlayerCharacterController::ToggleWalk);
 }
 
 void APlayerCharacterController::MoveForward(float Axis)
@@ -63,4 +67,28 @@ void APlayerCharacterController::BeginJump()
 void APlayerCharacterController::EndJump()
 {
 	PlayerCharacter->bPressedJump = false;
+}
+
+void APlayerCharacterController::ToggleWalk()
+{
+	if (bIsWalking == false)
+	{
+		bIsWalking = true;
+		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	}
+	else
+	{
+		bIsWalking = false;
+		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = JogSpeed;
+	}
+}
+
+void APlayerCharacterController::BeginSprint()
+{
+	PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+}
+
+void APlayerCharacterController::EndSprint()
+{
+	PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = JogSpeed;
 }

@@ -17,13 +17,12 @@ APlayerCharacter::APlayerCharacter()
 	{
 		CameraSpringArm->SetupAttachment(RootComponent);
 		CameraSpringArm->TargetArmLength = 450.f;
-		CameraSpringArm->bEnableCameraLag = true;
-		CameraSpringArm->CameraLagSpeed = 5.f;
 	}
 	CharacterCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Player Camera"));
 	if (CharacterCamera)
 	{
 		CharacterCamera->AttachTo(CameraSpringArm);
+		CharacterCamera->bUsePawnControlRotation = true;
 	}
 }
 

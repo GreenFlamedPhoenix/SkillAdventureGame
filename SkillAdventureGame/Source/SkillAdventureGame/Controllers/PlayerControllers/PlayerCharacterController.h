@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "PlayerCharacterController.generated.h"
 class APlayerCharacter;
 
@@ -33,4 +35,22 @@ public:
 	void BeginJump();
 	UFUNCTION()
 	void EndJump();
+	UFUNCTION()
+	void ToggleWalk();
+	UFUNCTION()
+	void BeginSprint();
+	UFUNCTION()
+	void EndSprint();
+
+	UPROPERTY()
+	bool bIsWalking = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "2. Movement Speed")
+	float SprintSpeed = 950.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "2. Movement Speed")
+	float JogSpeed = 500.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "2. Movement Speed")
+	float WalkSpeed = 200.f;
 };
