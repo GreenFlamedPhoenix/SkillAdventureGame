@@ -3,8 +3,13 @@
 
 #include "PlayerCharacterController.h"
 #include "PlayerCharacter/PlayerCharacter.h"
+#include "PlayerComponents/MeleeAttackComponent.h"
 
 
+APlayerCharacterController::APlayerCharacterController()
+{
+	MeleeAttackComponent = CreateDefaultSubobject<UMeleeAttackComponent>(TEXT("Melee Attack Component"));
+}
 
 void APlayerCharacterController::BeginPlay()
 {
@@ -31,6 +36,7 @@ void APlayerCharacterController::SetupInputComponent()
 	InputComponent->BindAction("Sprint", IE_Pressed, this, &APlayerCharacterController::BeginSprint);
 	InputComponent->BindAction("Sprint", IE_Released, this, &APlayerCharacterController::EndSprint);
 	InputComponent->BindAction("Toggle Walk", IE_Pressed, this, &APlayerCharacterController::ToggleWalk);
+	InputComponent->BindAction("Attack", IE_Pressed, this, &APlayerCharacterController::AttackDelegate);
 }
 
 void APlayerCharacterController::MoveForward(float Axis)
@@ -39,6 +45,7 @@ void APlayerCharacterController::MoveForward(float Axis)
 	{
 		if (Axis != 0.f)
 		{
+			if (Axis < 0.f) {Axis = -0.5f;}
 			FVector Direction = PlayerCharacter->GetActorForwardVector();
 			PlayerCharacter->AddMovementInput(Direction, Axis);
 		}
@@ -91,4 +98,9 @@ void APlayerCharacterController::BeginSprint()
 void APlayerCharacterController::EndSprint()
 {
 	PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = JogSpeed;
+}
+
+void APlayerCharacterController::AttackDelegate()
+{
+	MeleeAttackComponent->MeleeAttack();
 }

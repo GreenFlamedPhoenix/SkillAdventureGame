@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "PlayerCharacterController.generated.h"
 class APlayerCharacter;
+class UMeleeAttackComponent;
 
 /**
  * 
@@ -18,8 +19,12 @@ class SKILLADVENTUREGAME_API APlayerCharacterController : public APlayerControll
 	GENERATED_BODY()
 
 public:
+	APlayerCharacterController();
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UMeleeAttackComponent* MeleeAttackComponent;
 
 	UPROPERTY()
 	APlayerCharacter* PlayerCharacter;
@@ -41,6 +46,8 @@ public:
 	void BeginSprint();
 	UFUNCTION()
 	void EndSprint();
+	UFUNCTION()
+	void AttackDelegate();
 
 	UPROPERTY()
 	bool bIsWalking = false;
