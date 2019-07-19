@@ -16,6 +16,6 @@ public:
 	// Sets default values for this actor's properties
 	AOreDepositBase();
 	
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 DepositHealth;
 };
