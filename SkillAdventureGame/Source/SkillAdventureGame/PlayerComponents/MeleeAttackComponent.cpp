@@ -47,6 +47,7 @@ void UMeleeAttackComponent::MeleeAttack()
 
 		if (TraceHit.GetActor() != nullptr)
 		{
+			//UE_LOG(LogTemp, Warning, TEXT("Hit someting!"))
 			ICombatInterface* CombatInterface = Cast<ICombatInterface>(TraceHit.GetActor());
 			if (CombatInterface)
 			{

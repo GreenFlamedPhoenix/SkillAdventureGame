@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "WorldDestructibles/Ores/OreDepositBase.h"
+#include "OreDepositBase.h"
 #include "EmeraldOreDeposit.generated.h"
 
 /**

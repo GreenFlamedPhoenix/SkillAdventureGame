@@ -2,6 +2,7 @@
 
 
 #include "PickUpBase.h"
+#include "PlayerCharacter/PlayerCharacter.h"
 
 // Sets default values
 APickUpBase::APickUpBase()
@@ -17,7 +18,8 @@ void APickUpBase::BeginPlay()
 	Super::BeginPlay();
 
 	GetWorld()->GetTimerManager().SetTimer(DespawnTimer, this, &APickUpBase::ManageDespawnTimer, 1.f, true);
-	
+
+	PlayerCharacter = Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 }
 
 void APickUpBase::ManageDespawnTimer()

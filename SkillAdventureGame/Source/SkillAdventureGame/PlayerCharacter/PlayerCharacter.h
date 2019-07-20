@@ -34,4 +34,10 @@ public:
 
 	UPROPERTY()
 	float SpringArmLength = 450.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TMap<FName, int32> PlayerCraftingInventory;
+
+	UFUNCTION(BlueprintCallable)
+	void AddItemToInventory(FName inItemName);
 };

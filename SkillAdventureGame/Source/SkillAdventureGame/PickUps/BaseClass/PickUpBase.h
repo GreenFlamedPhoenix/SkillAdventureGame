@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "PickUpBase.generated.h"
+class APlayerCharacter;
 
 UCLASS()
 class SKILLADVENTUREGAME_API APickUpBase : public AActor
@@ -21,6 +22,9 @@ protected:
 
 public:	
 	UPROPERTY()
+	APlayerCharacter* PlayerCharacter;
+
+	UPROPERTY()
 	FTimerHandle DespawnTimer;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "1. Spawning")
@@ -28,5 +32,8 @@ public:
 
 	UFUNCTION()
 	void ManageDespawnTimer();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FName ItemName;
 
 };
