@@ -23,7 +23,7 @@ APlayerCharacter::APlayerCharacter()
 	CharacterCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Player Camera"));
 	if (CharacterCamera)
 	{
-		CharacterCamera->AttachToComponent(CameraSpringArm, FAttachmentTransformRules::KeepWorldTransform);
+		CharacterCamera->SetupAttachment(CameraSpringArm);
 		CharacterCamera->bUsePawnControlRotation = true;
 	}
 }
